@@ -34,14 +34,14 @@ app.get('/users', (req, res) => {
 
 // Add a new user
 app.post('/adduser', (req, res) => {
-    let { username, email, password, first_name, last_name, address, phone_number, role, salary } = req.body;
+    let { username, email, password, first_name, last_name, address,country_code, phone_number, role, salary } = req.body;
 
     let query = `
-        INSERT INTO users (username, email, password, first_name, last_name, address, phone_number, role, salary)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO users (username, email, password, first_name, last_name, address,  country_code ,phone_number, role, salary)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    db.query(query, [username, email, password, first_name, last_name, address, phone_number, role, salary], (err, results) => {
+    db.query(query, [username, email, password, first_name, last_name, address, country_code,phone_number, role, salary], (err, results) => {
         if (err) throw err;
         res.json({ "msg": "User added successfully" });
     });
@@ -74,7 +74,7 @@ app.put('/updateUser/:id', (req, res) => {
         first_name = ?, 
         last_name = ?, 
         address = ?, 
-        phone_number = ?,    -- Added phone number update
+        phone_number = ?,    
         role = ?, 
         salary = ? 
         WHERE id = ?
